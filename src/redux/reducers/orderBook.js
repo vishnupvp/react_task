@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
       case UPDATE_LIST: {
         return {
           ...state,
-          list: [...action.payload, ...state.list.slice(0, 70)],
+          list: [...action.payload, ...state.list.slice(0, 10)],
         };
       }
       default:

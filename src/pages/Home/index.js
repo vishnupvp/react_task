@@ -42,7 +42,7 @@ const Home = () => {
                     amount
                 })
 
-            if(arr.length === 30){
+            if (arr.length === 20) {
                 update(arr)
                 arr = []
             }
