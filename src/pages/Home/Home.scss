@@ -1,0 +1,61 @@
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+
+    .wrapper{
+
+    }
+}
+
+$border_color: grey;
+
+.table{
+    width: 800px;
+    border: 1px solid $border_color;
+    font-size: 0.75rem;
+
+    .trow{
+        height: 17px;
+        width: 100%;
+
+        .tcell{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+
+            &:not(:first-child){
+                border-left: 1px solid $border_color;
+            }
+        }
+    }
+    .thead{
+        .trow{
+            .tcell{
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .tbody{
+        .trow{
+            border-top: 1px solid $border_color;
+            .tcell{
+                
+            }
+        }
+    }
+
+    .trow{
+        display: flex;
+        justify-content: space-between;
+    
+        .tcell{
+            flex-grow: 1;
+        }
+    }
+    
+}
