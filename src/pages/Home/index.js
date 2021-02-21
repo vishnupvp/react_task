@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Header } from 'components'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import {updateOrders} from "redux/actions"
-
+import { updateOrders } from "redux/actions"
 import './Home.scss'
 
 const Home = () => {
@@ -67,45 +66,53 @@ const Home = () => {
 
     return (
         <div>
-            <Header />
             <div className="container">
-                <div className="wrapper">
-                    <div className="table">
-                        <div className="thead">
-                            <div className="trow">
-                                <div className="tcell">
-                                    Count
-                                </div>
-                                <div className="tcell">
-                                    Amount
-                                </div>
-                                <div className="tcell">
-                                    Total
-                                </div>
-                                <div className="tcell">
-                                    Price
+                <div className="panel">
+                    <div className="header">
+                        <div>
+                            <span>Order Book</span>
+                            <span>&nbsp;</span>
+                            <span>BTC/ USD</span>
+                        </div>
+                    </div>
+                    <div className="body">
+                        <div className="table">
+                            <div className="thead">
+                                <div className="trow">
+                                    <div className="tcell">
+                                        Count
+                                    </div>
+                                    <div className="tcell">
+                                        Amount
+                                    </div>
+                                    <div className="tcell">
+                                        Total
+                                    </div>
+                                    <div className="tcell">
+                                        Price
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="tbody">
-                            {orders.slice(0, 20).map(({price, amount, count}, index) => {
-                                return(
-                                    <div className="trow" key={`row-${index}`}>
-                                        <div className="tcell">
-                                            {count}
+                            <div className="tbody">
+                                {orders.slice(0, 20).map(({price, amount, count}, index) => {
+                                    return(
+                                        <div className="trow" key={`row-${index}`}>
+                                            <div className="tcell">
+                                                {count}
+                                            </div>
+                                            <div className="tcell">
+                                                {amount}
+                                            </div>
+                                            <div className="tcell">
+                                            </div>
+                                            <div className="tcell">
+                                                {price}
+                                            </div>
                                         </div>
-                                        <div className="tcell">
-                                            {amount}
-                                        </div>
-                                        <div className="tcell">
-                                        </div>
-                                        <div className="tcell">
-                                            {price}
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            
+                                    )
+                                })}
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

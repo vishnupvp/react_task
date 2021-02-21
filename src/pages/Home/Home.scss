@@ -1,16 +1,31 @@
 .container{
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     height: 100vh;
+    background-color: #273640;
+    color: #fff;
+    padding: 2rem 0;
+    align-items: center;
 
-    .wrapper{
+    .panel{
+        max-width: 1200px;
+        margin: 0 auto;
+        border: 1px solid #19232a;
+        background-color: #1b262d;
 
+        .header{
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+        }
+        .body{
+            padding: 0.5rem;
+        }
     }
 }
 
-$border_color: grey;
+$border_color: transparent;
 
 .table{
     width: 800px;
@@ -20,6 +35,11 @@ $border_color: grey;
     .trow{
         height: 17px;
         width: 100%;
+
+        &:hover{
+            background-color:lighten($color: #1b262d, $amount: 2%);
+            cursor: pointer;
+        }
 
         .tcell{
             display: flex;
@@ -33,6 +53,7 @@ $border_color: grey;
         }
     }
     .thead{
+        opacity: 0.6;
         .trow{
             .tcell{
                 text-transform: uppercase;
