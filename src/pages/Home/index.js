@@ -31,14 +31,12 @@ const Home = () => {
         }
 
         const onMessage = ({ data }) => {
-            console.log(data, "message")
-
-            if (!isLoading)
-                setLoader(false)
-
 
             if (!Array.isArray(JSON.parse(data)))
                 return;
+
+            if (isLoading)
+                setLoader(false)
 
             let [a, value] = JSON.parse(data)
             let [price, count, amount] = value
@@ -98,42 +96,51 @@ const Home = () => {
                             <div className="thead">
                                 <div className="trow">
                                     <div className="tcell">
+
+                                    </div>
+                                    <div className="tcell">
                                         Count
-                                        </div>
+                                    </div>
                                     <div className="tcell">
                                         Amount
-                                        </div>
+                                    </div>
                                     <div className="tcell">
                                         Total
-                                        </div>
+                                    </div>
                                     <div className="tcell">
                                         Price
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             {isLoading ?
                                 <div className="loader">Loading..</div>
                                 :
-                                <div className="tbody">
-                                    {orders.slice(0, 20).map(({ price, amount, count }, index) => {
-                                        return (
-                                            <div className="trow" key={`row-${index}`}>
-                                                <div className="tcell">
-                                                    {count}
+                                <div className="orders-body-wrap">
+                                    <div className="tbody">
+                                        {orders.slice(0, 20).map(({ price, amount, count }, index) => {
+                                            return (
+                                                <div className="trow" key={`row-${index}`}>
+                                                    <div className="tcell">
+                                                        <i class="fa fa-bell" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div className="tcell">
+                                                        {count}
+                                                    </div>
+                                                    <div className="tcell">
+                                                        {amount}
+                                                    </div>
+                                                    <div className="tcell">
+                                                    </div>
+                                                    <div className="tcell">
+                                                        {price}
+                                                    </div>
                                                 </div>
-                                                <div className="tcell">
-                                                    {amount}
-                                                </div>
-                                                <div className="tcell">
-                                                </div>
-                                                <div className="tcell">
-                                                    {price}
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
+                                            )
+                                        })}
+                                    </div>
                                     <BarChart data={orders.slice(0, 20)} />
                                 </div>
+
                             }
                         </div>
                     </div>
