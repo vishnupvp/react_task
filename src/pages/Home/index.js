@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import BarChart from './BarChart'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { updateOrders } from "redux/actions"
 import './Home.scss'
+import Table from "./Table"
 
 const Home = () => {
     const orders = useSelector(({ orderBook }) => orderBook.list, shallowEqual)
@@ -48,7 +48,8 @@ const Home = () => {
                     amount
                 })
 
-            if (arr.length === 10) {
+            // limit the number of updates to redux 
+            if (arr.length === 20) {
                 update(arr)
                 arr = []
             }
@@ -79,6 +80,8 @@ const Home = () => {
         setCollapse(!isCollapsed)
     }
 
+    let tableData = orders.slice(0, 20)
+
     return (
         <div>
             <div className="container">
@@ -90,58 +93,66 @@ const Home = () => {
                             <span>&nbsp;</span>
                             <span>BTC/ USD</span>
                         </div>
+                        <div className="widget-actions">
+                            <button type="button">
+                                <i className="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button">
+                                <i className="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button">
+                                <i className="fa fa-cog" aria-hidden="true"></i>
+                            </button>
+                            <button type="button">
+                                <i className="fa fa-search-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button">
+                                <i className="fa fa-search-minus" aria-hidden="true"></i>
+                            </button>
+
+
+                        </div>
                     </div>
                     <div className="body">
-                        <div className="table">
-                            <div className="thead">
-                                <div className="trow">
-                                    <div className="tcell">
-
-                                    </div>
-                                    <div className="tcell">
-                                        Count
-                                    </div>
-                                    <div className="tcell">
-                                        Amount
-                                    </div>
-                                    <div className="tcell">
-                                        Total
-                                    </div>
-                                    <div className="tcell">
-                                        Price
-                                    </div>
-                                </div>
-                            </div>
-                            {isLoading ?
-                                <div className="loader">Loading..</div>
-                                :
-                                <div className="orders-body-wrap">
-                                    <div className="tbody">
-                                        {orders.slice(0, 20).map(({ price, amount, count }, index) => {
-                                            return (
-                                                <div className="trow" key={`row-${index}`}>
-                                                    <div className="tcell">
-                                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div className="tcell">
-                                                        {count}
-                                                    </div>
-                                                    <div className="tcell">
-                                                        {amount}
-                                                    </div>
-                                                    <div className="tcell">
-                                                    </div>
-                                                    <div className="tcell">
-                                                        {price}
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <BarChart data={orders.slice(0, 20)} />
-                                </div>
-
-                            }
+                        <div className="d-flex">
+                            <Table
+                                data={tableData}
+                                chartProps={{
+                                    data: tableData,
+                                    svgStyles: { fill: '#17B157', transform: 'scale(-1, 1)' }
+                                }}
+                                isLoading={isLoading}
+                            />
+                            <Table
+                                data={tableData}
+                                chartProps={{
+                                    data: tableData,
+                                    svgStyles: { fill: '#f05359', transform: 'scale(1, 1)' }
+                                }}
+                                isLoading={isLoading}
+                            />
+                        </div>
+                    </div>
+                    <div className="footer">
+                        <div>
+                            <button className="btn-restore">
+                                <i className="fa fa-window-restore" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <ul className="d-flex">
+                                <li>
+                                    <button>
+                                        <span>FULL BOOK</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <span className="data-status">
+                                        <i className="fa fa-circle" aria-hidden="true"></i>
+                                        <u>REAL-TIME</u>
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
